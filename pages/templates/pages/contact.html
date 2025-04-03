@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load app_tags %}
+
+
+{% block title %}
+{{ title }}
+{% endblock  %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p>{% greeting %}</p>
+    {% active_site path=request.path name="contact" %}
+    <button class="btn btn-primary">Test</button>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div>
+        <a class="btn btn-primary" href="{% url "appointments:tags_new" %}">New</a>
+    </div>
+    <div>
+        {% if tags %}
+            <ul>
+                {% for tag in tags %}
+                    <li>
+                        <a href="#">{{ tag.title }}</a>
+                        <a class="btn btn-success" href="{% url "appointments:tags_show" pk=tag.id %}">Show</a>
+                        <a class="btn btn-primary" href="{% url "appointments:tags_update" pk=tag.id %}">Update</a>
+                        <a class="btn btn-danger" href="{% url "appointments:tags_delete" pk=tag.id %}">Delete</a>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{% trans "No Tags available." %}</p>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

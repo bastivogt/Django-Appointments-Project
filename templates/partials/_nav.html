@@ -1,0 +1,73 @@
+{% load app_tags static i18n %}
+<nav class="navbar bg-primary navbar-expand-lg shadow" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}"><img class="logo" src="{% static "images/icons/logo-white.svg" %}" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item"> 
+                <a class="nav-link {% active_site path=request.path name="appointments" %}" href="{% url "appointments:index" %}">{% trans "Appointments" %}</a>
+            </li>
+            <li class="nav-item"> 
+                <a class="nav-link {% active_site path=request.path name="tags" %}" href="{% url "appointments:tags_index" %}">{% trans "Tags" %}</a>
+            </li>
+            {% endif %}
+
+
+
+          {% comment %} <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li> {% endcomment %}
+
+        </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"> 
+                <a class="nav-link {% active_site path=request.path name="contact" %}" href="{% url "pages:page" "contact" %}">{% trans "Contact" %}</a>
+            </li>
+            <li class="nav-item"> 
+                <a class="nav-link {% active_site path=request.path name="privacy-police" %}" href="{% url "pages:page" "privacy-police" %}">{% trans "Privacy police" %}</a>
+            </li>
+            <li class="nav-item"> 
+                <a class="nav-link {% active_site path=request.path name="imprint" %}" href="{% url "pages:page" "imprint" %}">{% trans "Imprint" %}</a>
+            </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="opacity-75" src="{% static 'images/icons/user.svg' %}" alt="User">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
+                {% if request.user.is_authenticated %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:index' %}">{% trans "Dashboard" %}</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:update' pk=request.user.id %}">{% trans "Change userdate" %}</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:password_change' %}">{% trans "Change password" %}</a>
+                  </li>
+                  <li>
+                    <form method="post" action="{% url 'sevo_user:sign_out' %}">
+                      {% csrf_token %}
+                      <button class="btn btn-link dropdown-item">{% trans "Sign out" %}</button>
+                  </form>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:sign_in' %}">{% trans "Sign in" %}</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:sign_up' %}">{% trans "Sign up" %}</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'sevo_user:password_reset' %}">{% trans "Forgot password" %}</a>
+                  </li>
+                {% endif %}
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

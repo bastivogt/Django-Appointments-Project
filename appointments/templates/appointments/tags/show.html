@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    <div>
+        {% if appointments %}
+            <ul>
+                {% for app in appointments %}
+                    <li>
+                        <a href="#">{{ app.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                {% trans "No Appointments available." %}
+            </p>
+        {% endif %}
+    </div>
+    {% include "../partials/_back_link.html" %}
+
+
+{% endblock %}

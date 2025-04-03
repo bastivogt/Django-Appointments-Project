@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    {% block custom_css %}{% endblock %}
+    <script src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "js/app.js" %}" defer></script>
+    {% block custom_js %}{% endblock %}
+    <title>Appointments - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% include "partials/_nav.html" %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show m-0 rounded-0 message-alert" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    
+    <main class="container">
+
+        <div class="py-5">
+            {% block content %}{% endblock %}
+
+        </div>
+    </main>
+</body>
+</html>

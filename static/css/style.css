@@ -1,0 +1,12 @@
+
+.logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    transform: scale(1);
+    transition: all .3s ease;
+}
+
+.logo:hover {
+    transform: scale(.8);
+}

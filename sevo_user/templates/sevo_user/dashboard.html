@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="w-50 mx-auto">
+        <h1 class="mb-3">Hello, {{ request.user.username }}!</h1>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>{{ title }}</h3>
+            </div>
+            <div class="list-group list-group-flush">
+                {% if user.is_authenticated == False %}
+                    <a class="list-group-item list-group-item-action" href="{% url 'sevo_user:sign_up' %}">{% trans "Sign up" %}</a>
+                    <a class="list-group-item list-group-item-action" href="{% url 'sevo_user:sign_in' %}">{% trans "Sign in" %}</a>
+                {% else %}
+                    <a class="list-group-item list-group-item-action" href="{% url 'sevo_user:password_change' %}">{% trans "Change password" %}</a>
+                    <a class="list-group-item list-group-item-action" href="{% url 'sevo_user:update' request.user.id %}">{% trans "Change userdata" %}</a>
+                    <form method="post" action="{% url 'sevo_user:sign_out' %}">
+                        {% csrf_token %}
+                        <button class="border-top-0 border-start-0 border-end-0 list-group-item list-group-item-action">{% trans "Sign out" %}</button>
+                    </form>
+                    <a class="list-group-item list-group-item-action text-danger" href="{% url 'sevo_user:delete' request.user.id %}">{% trans "Delete account" %}</a>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
