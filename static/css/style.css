@@ -10,3 +10,8 @@
 .logo:hover {
     transform: scale(.8);
 }
+
+
+.content {
+    min-height: 80vh;
+}
