@@ -38,7 +38,7 @@ class AppointmentForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "description": forms.Textarea(attrs={"class": "form-control"}),
-            "date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+            "date": forms.DateTimeInput(attrs={"type": "datetime-local", "class": "form-control"}),
             "tags": forms.CheckboxSelectMultiple()
             # "tags": forms.SelectMultiple(attrs={"class": "form-select multiple"})
         }
