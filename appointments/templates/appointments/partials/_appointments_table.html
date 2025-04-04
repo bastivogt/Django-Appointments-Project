@@ -20,7 +20,11 @@
                 <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.date|date:"d.m.Y / H:i" }}</th>
                 <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">
                     {% for tag in app.tags.all %}
-                        <a href="{% url "appointments:tags_show" pk=tag.pk %}"><span class="badge text-bg-secondary">{{ tag.title }}</span></a>
+                        <span class="badge text-bg-secondary">
+                            <a class="link-light link-underline-opacity-0" href="{% url "appointments:tags_show" pk=tag.pk %}">
+                                {{ tag.title }}
+                            </a>
+                        </span>                    
                     {% endfor %}
                 </th>
                 <td class="{% if app.is_expired %}text-black-50{% endif %}">
