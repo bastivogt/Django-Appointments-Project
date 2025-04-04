@@ -9,14 +9,13 @@
         {% csrf_token %}
         <div class="card">
             <div class="card-header">
-                {{ title }}
+                <strong>{{ title }}</strong>
             </div>
             <div class="card-body">
                 {% include "../partials/_form_inner.html" %}
-                <div class="mb-3">
-                    <button class="btn btn-primary" type="submit">Update</button>
-                </div>
-                
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" type="submit">Update</button>
             </div>
         </div>
         {% include "../partials/_back_link.html" %}

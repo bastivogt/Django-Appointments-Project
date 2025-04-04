@@ -6,17 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
-
+    <h1 class="display-1 mb-5">{{ title }}</h1>
     <div>
         {% if appointments %}
-            <ul>
-                {% for app in appointments %}
-                    <li>
-                        <a href="#">{{ app.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="table-responsive">
+                {% include "../partials/_appointments_table.html" %}
+            </div>
         {% else %}
             <p>
                 {% trans "No Appointments available." %}

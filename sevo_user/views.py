@@ -62,7 +62,8 @@ class SignUpView(FormView):
         return context
 
     def form_valid(self, form):
-        user = form.save(commit=False)
+        # user = form.save(commit=False)
+        # form.save()
         form.save()
         #login(request=self.request, user=user)
         messages.add_message(self.request, messages.SUCCESS, _("You are signed up and logged in!"))

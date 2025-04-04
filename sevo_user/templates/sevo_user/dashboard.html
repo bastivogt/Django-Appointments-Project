@@ -10,7 +10,7 @@
         <h1 class="mb-3">Hello, {{ request.user.username }}!</h1>
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h3>{{ title }}</h3>
+                <strong>{{ title }}</strong>
             </div>
             <div class="list-group list-group-flush">
                 {% if user.is_authenticated == False %}

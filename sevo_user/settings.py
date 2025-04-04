@@ -3,7 +3,7 @@ from django.conf import settings
 
 # defaults
 SEVO_USER_SIGN_IN_REDIRECT_URL = "sevo_user:index"
-SEVO_USER_SIGN_UP_REDIRECT_URL = "sevo_user:sigm_in"
+SEVO_USER_SIGN_UP_REDIRECT_URL = "sevo_user:sign_in"
 SEVO_USER_SIGN_OUT_REDIRECT_URL = "sevo_user:sign_in"
 SEVO_USER_DELETE_REDIRECT_URL = "sevo_user:sign_up"
 SEVO_USER_UPDATE_REDIRECT_URL = "sevo_user:index"

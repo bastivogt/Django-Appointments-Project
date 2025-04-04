@@ -1,0 +1,38 @@
+{% load i18n %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Tags" %}</th>
+            <th>
+                <div class="d-flex justify-content-end">
+                    {% trans "Actions" %}
+
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in appointments %}
+            <tr>
+                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.title }}</th>
+                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.date|date:"d.m.Y / H:i" }}</th>
+                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">
+                    {% for tag in app.tags.all %}
+                        <a href="{% url "appointments:tags_show" pk=tag.pk %}"><span class="badge text-bg-secondary">{{ tag.title }}</span></a>
+                    {% endfor %}
+                </th>
+                <td class="{% if app.is_expired %}text-black-50{% endif %}">
+                    <div class="d-flex justify-content-end gap-1 ">
+                        <a class="btn btn-primary btn-sm" href="{% url "appointments:show" pk=app.pk %}">{% trans "Show" %}</a>
+                        <a class="btn btn-primary btn-sm" href="{% url "appointments:update" pk=app.pk %}">{% trans "Edit" %}</a>
+                        <a class="btn btn-danger btn-sm" href="{% url "appointments:delete" pk=app.pk %}">{% trans "Delete" %}</a>
+
+                    </div>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

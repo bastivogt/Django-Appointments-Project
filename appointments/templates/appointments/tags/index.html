@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
-    <div>
-        <a class="btn btn-primary" href="{% url "appointments:tags_new" %}">New</a>
+    <h1 class="display-1">{{ title }}</h1>
+    <div class="mt-4">
+        <a class="btn btn-primary btn-lg" href="{% url "appointments:tags_new" %}">{% trans "New" %}</a>
     </div>
+    <hr class="mb-5">
     <div>
         {% if tags %}
             <div class="table-responsive mt-5">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>{% trans "#" %}</th>
                             <th>{% trans "Title" %}</th>
                             <th>{% trans "Created" %}</th>
                             <th>{% trans "Updated" %}</th>
@@ -26,7 +26,6 @@
                     <tbody>
                         {% for tag in tags %}
                             <tr>
-                                <th scope="row"><strong>{{ tag.pk }}</strong></th>
                                 <th scope="row">{{ tag.title }}</th>
                                 <td>{{ tag.created|date:"d.m.Y / H:i" }}</td>
                                 <td>{{ tag.updated|date:"d.m.Y / H:i" }}</td>

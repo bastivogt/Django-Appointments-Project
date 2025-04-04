@@ -1,18 +1,22 @@
 <div class="card shadow">
     <div class="card-header">
-        <h3>
+        <strong>
             {{ title }}
-        </h3>
+        </strong>
     </div>
     <div class="card-body">
         {% for field in form %}
             <div class="mb-3">
                 {{ field.label_tag }}
+                {% if field.field.required %}
+                    <span class="text-danger">*</span>
+                {% endif %}
                 {{ field|cut:">"|add:" class='form-control'>" }}
+
             </div>
             {% if field.errors %}
                 {% for error in field.errors %}
-                    <div class="alert alert-danger" role="alert">
+                    <div class="text-danger">
                         {{ error }}
                     </div>
                 {% endfor %}

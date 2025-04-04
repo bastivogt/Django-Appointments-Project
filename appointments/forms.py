@@ -24,7 +24,7 @@ class AppointmentForm(forms.ModelForm):
         user = kwargs.pop("user")
         super().__init__(*args, **kwargs)
 
-        #self.fields["tags"].queryset = Tag.objects.filter(user=user)
+        self.fields["tags"].queryset = Tag.objects.filter(user=user)
 
 
     class Meta:

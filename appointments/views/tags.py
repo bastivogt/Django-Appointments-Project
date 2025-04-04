@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from appointments.forms import TagForm
 from appointments.models import Tag
 
-
+@login_required(login_url="sevo_user:sign_in")
 def index(request):
     tags = Tag.objects.filter(user=request.user)
     print(tags)
@@ -14,7 +15,7 @@ def index(request):
         "tags": tags
     })
 
-
+@login_required(login_url="sevo_user:sign_in")
 def new(request):
     if request.method == "POST":
         form = TagForm(request.POST, initial={"user": request.user})
@@ -31,7 +32,7 @@ def new(request):
         "form": form
     })
 
-
+@login_required(login_url="sevo_user:sign_in")
 def update(request, pk):
     tag = get_object_or_404(Tag, pk=pk, user=request.user)
     if request.method == "POST":
@@ -47,18 +48,18 @@ def update(request, pk):
         "form": form
     })
 
-
+@login_required(login_url="sevo_user:sign_in")
 def show(request, pk):
     tag = get_object_or_404(Tag, pk=pk, user=request.user)
     appointments = tag.appointments.all()
     return render(request, "appointments/tags/show.html", {
-        "title": f"#{tag.pk} - {tag.title}",
+        "title": f"{tag.title}",
         "tag": tag,
         "appointments": appointments
     })
 
 
-
+@login_required(login_url="sevo_user:sign_in")
 def delete(request, pk):
     tag = get_object_or_404(Tag, pk=pk, user=request.user)
     if request.method == "POST":
@@ -67,6 +68,6 @@ def delete(request, pk):
         return redirect("appointments:tags_index")
 
     return render(request, "appointments/tags/confirm_delete.html", {
-        "title": f"#{tag.pk} - {tag.title}",
+        "title": f"{tag.title}",
         "tag": tag
     })
