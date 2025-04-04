@@ -10,7 +10,7 @@ def index(request):
     tags = Tag.objects.filter(user=request.user)
     print(tags)
     return render(request, "appointments/tags/index.html", {
-        "title": "Tags",
+        "title": "All Tags",
         "tags": tags
     })
 
@@ -27,7 +27,7 @@ def new(request):
     else:
         form = TagForm(initial={"user": request.user})
     return render(request, "appointments/tags/new.html", {
-        "title": "Create new Tag",
+        "title": "Create Tag",
         "form": form
     })
 
@@ -52,7 +52,7 @@ def show(request, pk):
     tag = get_object_or_404(Tag, pk=pk, user=request.user)
     appointments = tag.appointments.all()
     return render(request, "appointments/tags/show.html", {
-        "title": "Show",
+        "title": f"#{tag.pk} - {tag.title}",
         "tag": tag,
         "appointments": appointments
     })
@@ -67,6 +67,6 @@ def delete(request, pk):
         return redirect("appointments:tags_index")
 
     return render(request, "appointments/tags/confirm_delete.html", {
-        "title": tag.title,
+        "title": f"#{tag.pk} - {tag.title}",
         "tag": tag
     })

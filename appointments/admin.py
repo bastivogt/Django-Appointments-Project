@@ -22,7 +22,9 @@ class AppointmentAdmin(admin.ModelAdmin):
         "user",
         "id",
         "title",
-        "time",
+        "date",
+        "tags_str",
+        "is_expired",
         "created",
         "updated"
     ]
@@ -31,6 +33,18 @@ class AppointmentAdmin(admin.ModelAdmin):
         "id", 
         "title"
     ]
+
+    list_filter = [
+        "date",
+ 
+    ]
+
+    readonly_fields = [
+        "is_expired"
+    ]
+
+
+
 
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Appointment, AppointmentAdmin)

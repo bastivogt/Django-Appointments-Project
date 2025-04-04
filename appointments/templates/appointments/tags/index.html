@@ -12,17 +12,37 @@
     </div>
     <div>
         {% if tags %}
-            <ul>
-                {% for tag in tags %}
-                    <li>
-                        <a href="#">{{ tag.title }}</a>
-                        <a class="btn btn-success" href="{% url "appointments:tags_show" pk=tag.id %}">Show</a>
-                        <a class="btn btn-primary" href="{% url "appointments:tags_update" pk=tag.id %}">Update</a>
-                        <a class="btn btn-danger" href="{% url "appointments:tags_delete" pk=tag.id %}">Delete</a>
+            <div class="table-responsive mt-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans "#" %}</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Created" %}</th>
+                            <th>{% trans "Updated" %}</th>
+                            <th class="d-flex justify-content-end">{% trans "Actions" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in tags %}
+                            <tr>
+                                <th scope="row"><strong>{{ tag.pk }}</strong></th>
+                                <th scope="row">{{ tag.title }}</th>
+                                <td>{{ tag.created|date:"d.m.Y / H:i" }}</td>
+                                <td>{{ tag.updated|date:"d.m.Y / H:i" }}</td>
+                                <td class="d-flex justify-content-end">
+                                    <div class="d-flex gap-1">
+                                        <a class="btn btn-primary btn-sm" href="{% url "appointments:tags_show" pk=tag.pk %}">{% trans "Show" %}</a>
+                                        <a class="btn btn-primary btn-sm" href="{% url "appointments:tags_update" pk=tag.pk %}">{% trans "Edit" %}</a>
+                                        <a class="btn btn-danger btn-sm" href="{% url "appointments:tags_delete" pk=tag.pk %}">{% trans "Delete" %}</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
 
-                    </li>
-                {% endfor %}
-            </ul>
+                </table>
+            </div>
         {% else %}
             <p>{% trans "No Tags available." %}</p>
         {% endif %}

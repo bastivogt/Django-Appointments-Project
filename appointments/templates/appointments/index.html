@@ -1,10 +1,67 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% block title %}
 {{ title }}
 {% endblock %}
 
 {% block content %}
     <h1>{{ title }}</h1>
+    <div>
+        <a class="btn btn-primary" href="{% url "appointments:new" %}">{% trans "New" %}</a>
+    </div>
+
+    {% if appointments %}
+
+            <div class="table-responsive mt-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Date" %}</th>
+                            <th>{% trans "Tags" %}</th>
+                            <th>
+                                <div class="d-flex justify-content-end">
+                                    {% trans "Actions" %}
+
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in appointments %}
+                            <tr>
+                                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.pk }}</th>
+                                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.title }}</th>
+                                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">{{ app.date|date:"d.m.Y / H:i" }}</th>
+                                <th class="{% if app.is_expired %}text-black-50{% endif %}" scope="row">
+                                    {% for tag in app.tags.all %}
+                                        <a href="{% url "appointments:tags_show" pk=tag.pk %}"><span class="badge text-bg-secondary">{{ tag.title }}</span></a>
+                                    {% endfor %}
+                                </th>
+                                <td class="{% if app.is_expired %}text-black-50{% endif %}">
+                                    <div class="d-flex justify-content-end gap-1 ">
+                                        <a class="btn btn-primary btn-sm" href="#">{% trans "Show" %}</a>
+                                        <a class="btn btn-primary btn-sm" href="#">{% trans "Edit" %}</a>
+                                        <a class="btn btn-danger btn-sm" href="#">{% trans "Delete" %}</a>
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            {% if has_expired %}
+            <div class="mt-5 d-flex justify-content-end">
+                <a class="btn btn-danger" href="{% url "appointments:delete_expired" %}">Delete expired Appointments</a>
+            </div>
+            {% endif %}
+    {% else %}
+        <p>{% trans "No Appointments available." %}</p>
+    {% endif %}
 
 {% endblock %}

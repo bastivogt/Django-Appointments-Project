@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<footer class="py-5 bg-black text-light">
+    <div class="container">
+        <div class="col-sm-4">
+            <h4 class="mb-3">Pages</h4>
+            <nav class="nav flex-column">
+                <a href="{% url "pages:page" name="contact" %}">{% trans "Contact" %}</a>
+                <a href="{% url "pages:page" name="privacy-police" %}">{% trans "Privacy police" %}</a>
+                <a href="{% url "pages:page" name="imprint" %}">{% trans "Imprint" %}</a>
+            </nav>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4"></div>
+    </div>
+</footer>

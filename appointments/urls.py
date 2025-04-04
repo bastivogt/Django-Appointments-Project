@@ -7,6 +7,8 @@ app_name = "appointments"
 urlpatterns = [
     # appointments
     path("appointments/", appointments.index, name="index"),
+    path("appointments/new/", appointments.new, name="new"),
+    path("appointments/delete/expired", appointments.delete_expired, name="delete_expired"),
 
     #tags
     path("tags/", tags.index, name="tags_index"),

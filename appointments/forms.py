@@ -20,4 +20,25 @@ class TagForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user")
+        super().__init__(*args, **kwargs)
+
+        #self.fields["tags"].queryset = Tag.objects.filter(user=user)
+
+
+    class Meta:
+        model = Appointment
+        fields = "__all__"
+        exclude = [
+            "user"
+        ]
+
+
+        widgets = {
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "description": forms.Textarea(attrs={"class": "form-control"}),
+            "date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+            "tags": forms.CheckboxSelectMultiple()
+            # "tags": forms.SelectMultiple(attrs={"class": "form-select multiple"})
+        }
