@@ -30,7 +30,7 @@ def new(request):
             form_obj.save()
             form.save_m2m()
 
-            messages.add_message(request, messages.SUCCESS, "Appointment created.")
+            messages.add_message(request, messages.SUCCESS, "Appointment created!")
             return redirect("appointments:index")
     else:
         form = AppointmentForm(initial={"user": request.user}, user=request.user)
@@ -46,7 +46,7 @@ def delete_expired(request):
         for app in apps:
             if app.is_expired():
                 app.delete()
-        messages.add_message(request, messages.SUCCESS, _("All expired Appointments deleted."))
+        messages.add_message(request, messages.SUCCESS, _("All expired Appointments deleted!"))
         return redirect("appointments:index")
     
     return render(request, "appointments/confirm_delete_expired.html", {
@@ -63,7 +63,7 @@ def update(request, pk):
             form_obj.user = request.user
             form_obj.save()
             form.save_m2m()
-            messages.add_message(request, messages.SUCCESS, "Appointment updated.")
+            messages.add_message(request, messages.SUCCESS, "Appointment updated!")
             return redirect("appointments:index")
     else:
         form = AppointmentForm(instance=model, user=request.user)
@@ -87,7 +87,7 @@ def delete(request, pk):
     model = get_object_or_404(Appointment, pk=pk, user=request.user)
     if request.method == "POST":
         model.delete()
-        messages.add_message(request, messages.SUCCESS, _("Apointment deleted."))
+        messages.add_message(request, messages.SUCCESS, _("Apointment deleted!"))
         return redirect("appointments:index")
 
     return render(request, "appointments/confirm_delete.html", {

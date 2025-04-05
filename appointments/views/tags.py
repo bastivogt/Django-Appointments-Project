@@ -23,7 +23,7 @@ def new(request):
             form_obj = form.save(commit=False)
             form_obj.user = request.user
             form_obj.save()
-            messages.add_message(request, messages.SUCCESS, "Tag created.")
+            messages.add_message(request, messages.SUCCESS, "Tag created!")
             return redirect("appointments:tags_index")
     else:
         form = TagForm(initial={"user": request.user})
@@ -39,7 +39,7 @@ def update(request, pk):
         form = TagForm(request.POST, instance=tag)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "Tag updated.")
+            messages.add_message(request, messages.SUCCESS, "Tag updated!")
             return redirect("appointments:tags_index")
     else:
         form = TagForm(instance=tag)
@@ -64,7 +64,7 @@ def delete(request, pk):
     tag = get_object_or_404(Tag, pk=pk, user=request.user)
     if request.method == "POST":
         tag.delete()
-        messages.add_message(request, messages.SUCCESS, "Tag deleted.")
+        messages.add_message(request, messages.SUCCESS, "Tag deleted!")
         return redirect("appointments:tags_index")
 
     return render(request, "appointments/tags/confirm_delete.html", {
