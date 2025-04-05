@@ -11,7 +11,7 @@
             {% csrf_token %}
             {% include "./partials/_fields.html" %}
         </form>
-        <hr>
+
         <div class="mt-3 d-flex gap-0 flex-column">
             <a class="back-link" href="#">{% trans "Back" %}</a>
             <a  href="{% url 'sevo_user:sign_in' %}">{% trans "Sign in" %}</a>
